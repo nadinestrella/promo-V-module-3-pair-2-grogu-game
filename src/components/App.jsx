@@ -8,7 +8,17 @@ function App() {
  const [frogs,setFrogs]= useState (["🐸","🐸","🐸"]);
  const [eggs,setEggs]= useState (["🥚","🥚","🥚"]);
  const [dice,setDice]= useState ([1,2,3,4]);
- 
+ const [isGameInProgress, setGameInProgress] = useState(true);
+  const [isGameWon, setGameWon] = useState(false);
+  const [isGameLost, setGameLost] = useState(false);
+
+  const rollDice = ()=> {}
+  // crear funcion para el dado 
+  
+    
+  
+};
+
   return (
     <div className="page">
       <header>
