@@ -1,7 +1,14 @@
 // Fichero src/components/App.jsxx
+import { useState } from 'react';
 import '../scss/App.scss';
 
 function App() {
+ const [groguPosition,setGroguPosition]= useState (0);
+ const [cookies,setCookies]= useState (["🍪","🍪","🍪"]);
+ const [frogs,setFrogs]= useState (["🐸","🐸","🐸"]);
+ const [eggs,setEggs]= useState (["🥚","🥚","🥚"]);
+ const [dice,setDice]= useState ([1,2,3,4]);
+ 
   return (
     <div className="page">
       <header>
@@ -9,15 +16,15 @@ function App() {
       </header>
       <main className="page">
         <section className="board">
-          <div className="cell">
+          <div className="cell" id="0">
             <div className="grogu">👣</div>
           </div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
+          <div className="cell" id="1"></div>
+          <div className="cell" id="2"></div>
+          <div className="cell" id="3"></div>
+          <div className="cell" id="4"></div>
+          <div className="cell" id="5"></div>
+          <div className="cell" id="6"></div>
         </section>
 
         <section>
