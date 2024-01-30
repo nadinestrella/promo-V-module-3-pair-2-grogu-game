@@ -1,23 +1,42 @@
-// Fichero src/components/App.jsxx
+// Fichero src/components/App.jsx
 import { useState } from 'react';
 import '../scss/App.scss';
 
 function App() {
- const [groguPosition,setGroguPosition]= useState (0);
- const [cookies,setCookies]= useState (["🍪","🍪","🍪"]);
- const [frogs,setFrogs]= useState (["🐸","🐸","🐸"]);
- const [eggs,setEggs]= useState (["🥚","🥚","🥚"]);
- const [dice,setDice]= useState ([1,2,3,4]);
- const [isGameInProgress, setGameInProgress] = useState(true);
-  const [isGameWon, setGameWon] = useState(false);
-  const [isGameLost, setGameLost] = useState(false);
+  const [groguPosition, setGroguPosition]= useState (0);
+  const [cookies, setCookies]= useState (["🍪","🍪","🍪"]);
+  const [frogs, setFrogs]= useState (["🐸","🐸","🐸"]);
+  const [eggs, setEggs]= useState (["🥚","🥚","🥚"]);
+  const [gameStatus, setGameStatus] = useState('En curso');
 
-  const rollDice = ()=> {}
-  // crear funcion para el dado 
+// crear funcion para el dado 
+
+function handleRollDice() {
+  const random = Math.ceil(Math.random()*4);
+  console.log(random);
+    return random;
+    }
+
+const movements = (event) => {
+  const randomNumber = handleRollDice();
+  if (randomNumber === 4) {
+    setGroguPosition(+1)
+  } else if (randomNumber === 3) {
+    const newEggs = eggs.splice(0, 1)
+    setEggs(newEggs)
+  } else if (randomNumber === 2) {
+    const newFrogs = frogs.splice(0, 1)
+    setFrogs(newFrogs)
+  } else if (randomNumber === 1) {
+    const newCookies = cookies.splice(0, 1)
+    setCookies(newCookies)
+  }
+console.log(newEggs);
+}
   
-    
+
   
-};
+  
 
   return (
     <div className="page">
@@ -29,16 +48,16 @@ function App() {
           <div className="cell" id="0">
             <div className="grogu">👣</div>
           </div>
-          <div className="cell" id="1"></div>
-          <div className="cell" id="2"></div>
-          <div className="cell" id="3"></div>
-          <div className="cell" id="4"></div>
-          <div className="cell" id="5"></div>
-          <div className="cell" id="6"></div>
+          <div className="cell"></div>
+          <div className="cell"></div>
+          <div className="cell"></div>
+          <div className="cell"></div>
+          <div className="cell"></div>
+          <div className="cell"></div>
         </section>
 
         <section>
-          <button className="dice">Lanzar Dado</button>
+          <button className="dice" onClick={movements}>Lanzar Dado</button>
           <div className="game-status">En curso</div>
         </section>
 
