@@ -1,7 +1,11 @@
-import React from 'react';
-
-function Dice() {
-  return <div>Dice</div>;
+function Dice({movements}) {
+  return (
+    <>
+      <button className="dice" onClick={movements}>
+        Lanzar Dado
+      </button>
+    </>
+  )
 }
 
 export default Dice;
