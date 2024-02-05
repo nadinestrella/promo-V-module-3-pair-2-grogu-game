@@ -40,17 +40,17 @@ function App() {
       const newEggs = eggs.slice(1);
       setEggs(newEggs);
       playGame()
-      setGameStatus("¡Has entregado un huevo")
+      setGameStatus("¡Has entregado un huevo!")
     } else if (randomNumber === 2) {
       const newFrogs = frogs.slice(1);
       setFrogs(newFrogs);
       playGame()
-      setGameStatus("¡Has entregado una rana")
+      setGameStatus("¡Has entregado una rana!")
     } else if (randomNumber === 1) {
       const newCookies = cookies.slice(1);
       setCookies(newCookies);
       playGame()
-      setGameStatus("¡Has entregado una galleta")
+      setGameStatus("¡Has entregado una galleta!")
     }
   };
 
@@ -61,7 +61,7 @@ function App() {
         <Board />
         <section>
           <Dice movements={movements}/>
-          <GameStatus playGame={playGame}/>
+          <GameStatus gameStatus={gameStatus}/>
         </section>
 
         <section className="goods-container">
