@@ -5,6 +5,7 @@ import Header from './Header';
 import Board from './Board';
 import Dice from './Dice';
 import GameStatus from './GameStatus';
+import RestartButton from './RestartButton';
 
 function App() {
   const [groguPosition, setGroguPosition] = useState(0);
@@ -14,16 +15,24 @@ function App() {
   const [gameStatus, setGameStatus] = useState('');
 
 
+  const restartGame = () => {
+    setGroguPosition(0);
+    setCookies(['🍪', '🍪', '🍪']);
+    setFrogs(['🐸', '🐸', '🐸']);
+    setEggs(['🥚', '🥚', '🥚']);
+    setGameStatus('');
+  }
+
+
   const playGame = () => {
-    if (groguPosition >= 6) {
+    if (groguPosition > 5) {
       setGameStatus("¡Has perdido!")
     } else if (cookies.length === 0 && frogs.length === 0 && eggs.length === 0 && groguPosition < 6) {
       setGameStatus("¡Has ganado!")
-    }
+    } 
   }
 
   // crear funcion para el dado
-
   function handleRollDice() {
     const random = Math.ceil(Math.random() * 4);
     console.log(random);
@@ -34,24 +43,28 @@ function App() {
     const randomNumber = handleRollDice();
     if (randomNumber === 4) {
       setGroguPosition(groguPosition + 1);
-      playGame()
       setGameStatus("¡Grogu avanza una casilla!")
+      //playGame()
     } else if (randomNumber === 3) {
       const newEggs = eggs.slice(1);
       setEggs(newEggs);
-      playGame()
+      
       setGameStatus("¡Has entregado un huevo!")
+      //playGame()
     } else if (randomNumber === 2) {
       const newFrogs = frogs.slice(1);
       setFrogs(newFrogs);
-      playGame()
+      
       setGameStatus("¡Has entregado una rana!")
+      //playGame()
     } else if (randomNumber === 1) {
       const newCookies = cookies.slice(1);
       setCookies(newCookies);
-      playGame()
+      
       setGameStatus("¡Has entregado una galleta!")
+      //playGame()
     }
+    playGame()
   };
 
   return (
@@ -80,7 +93,7 @@ function App() {
           <div className="goods-item">🐸</div>
         </section>
         <section>
-          <button className="restart-button">Reiniciar Juego</button>
+          <RestartButton restartGame= {restartGame}/>
         </section>
       </main>
     </div>
