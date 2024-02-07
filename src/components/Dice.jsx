@@ -1,17 +1,16 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-function Dice({movements}) {
+function Dice({ movements, end }) {
   return (
     <>
-      <button className="dice" onClick={movements}>
+      <button className={`dice ${end}`} onClick={movements}>
         Lanzar Dado 🎲
       </button>
     </>
-  )
+  );
 }
 
 Dice.propTypes = {
-  movements: PropTypes.func
-  
+  movements: PropTypes.func,
 };
 export default Dice;

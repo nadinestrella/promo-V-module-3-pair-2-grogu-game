@@ -1,5 +1,5 @@
 // Fichero src/components/App.jsx
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../scss/App.scss';
 import Header from './Header';
 import Board from './Board';
@@ -13,7 +13,11 @@ function App() {
   const [frogs, setFrogs] = useState(['🐸', '🐸', '🐸']);
   const [eggs, setEggs] = useState(['🥚', '🥚', '🥚']);
   const [gameStatus, setGameStatus] = useState('');
+  const [end, setEnd] = useState('');
 
+  useEffect(() => {
+    playGame();
+  }, [frogs, eggs, cookies, groguPosition]);
 
   const restartGame = () => {
     setGroguPosition(0);
@@ -21,16 +25,22 @@ function App() {
     setFrogs(['🐸', '🐸', '🐸']);
     setEggs(['🥚', '🥚', '🥚']);
     setGameStatus('');
-  }
-
+  };
 
   const playGame = () => {
-    if (groguPosition > 5) {
-      setGameStatus("¡Has perdido!")
-    } else if (cookies.length === 0 && frogs.length === 0 && eggs.length === 0 && groguPosition < 6) {
-      setGameStatus("¡Has ganado!")
-    } 
-  }
+    if (groguPosition === 6) {
+      setGameStatus('¡Has perdido!');
+      setEnd('hidden');
+    } else if (
+      cookies.length === 0 &&
+      frogs.length === 0 &&
+      eggs.length === 0 &&
+      groguPosition < 6
+    ) {
+      setGameStatus('¡Has ganado!');
+      setEnd('hidden');
+    }
+  };
 
   // crear funcion para el dado
   function handleRollDice() {
@@ -43,28 +53,26 @@ function App() {
     const randomNumber = handleRollDice();
     if (randomNumber === 4) {
       setGroguPosition(groguPosition + 1);
-      setGameStatus("¡Grogu avanza una casilla!")
-      //playGame()
+      setGameStatus('¡Grogu avanza una casilla!');
     } else if (randomNumber === 3) {
       const newEggs = eggs.slice(1);
       setEggs(newEggs);
-      
-      setGameStatus("¡Has entregado un huevo!")
+
+      setGameStatus('¡Has entregado un huevo!');
       //playGame()
     } else if (randomNumber === 2) {
       const newFrogs = frogs.slice(1);
       setFrogs(newFrogs);
-      
-      setGameStatus("¡Has entregado una rana!")
+
+      setGameStatus('¡Has entregado una rana!');
       //playGame()
     } else if (randomNumber === 1) {
       const newCookies = cookies.slice(1);
       setCookies(newCookies);
-      
-      setGameStatus("¡Has entregado una galleta!")
+
+      setGameStatus('¡Has entregado una galleta!');
       //playGame()
     }
-    playGame()
   };
 
   return (
@@ -73,8 +81,8 @@ function App() {
       <main className="page">
         <Board />
         <section>
-          <Dice movements={movements}/>
-          <GameStatus gameStatus={gameStatus}/>
+          <Dice movements={movements} end={end} />
+          <GameStatus gameStatus={gameStatus} />
         </section>
 
         <section className="goods-container">
@@ -93,7 +101,7 @@ function App() {
           <div className="goods-item">🐸</div>
         </section>
         <section>
-          <RestartButton restartGame= {restartGame}/>
+          <RestartButton restartGame={restartGame} />
         </section>
       </main>
     </div>
